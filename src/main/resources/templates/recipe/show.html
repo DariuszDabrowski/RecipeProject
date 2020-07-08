@@ -21,7 +21,7 @@
             <div class="card-group">
                 <div class="p-3 mb-2 w-100">
                     <div class="card-heading bg-primary border text-center">
-                        <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
+                        <!--/*@thymesVar id="recipe" type="com.github.dariuszdabrowski.recipeproject.domain.Recipe"*/-->
                         <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
                     </div>
                     <div class="card-body border">
@@ -33,7 +33,6 @@
                                 <ul>
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
-                                    <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
                                     <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat three</li>
                                 </ul>
                             </div>
