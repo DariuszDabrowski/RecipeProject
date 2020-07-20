@@ -2,6 +2,7 @@ package com.github.dariuszdabrowski.recipeproject.controllers;
 
 import com.github.dariuszdabrowski.recipeproject.commands.IngredientCommand;
 import com.github.dariuszdabrowski.recipeproject.commands.RecipeCommand;
+import com.github.dariuszdabrowski.recipeproject.repositories.RecipeRepository;
 import com.github.dariuszdabrowski.recipeproject.services.IngredientService;
 import com.github.dariuszdabrowski.recipeproject.services.RecipeService;
 import com.github.dariuszdabrowski.recipeproject.services.UnitOfMeasureService;
@@ -29,6 +30,8 @@ class IngredientControllerTest {
     RecipeService recipeService;
     @Mock
     UnitOfMeasureService unitOfMeasureService;
+    @Mock
+    RecipeRepository recipeRepository;
 
     IngredientController controller;
 
@@ -129,6 +132,18 @@ class IngredientControllerTest {
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
+
+    }
+
+    @Test
+    public void testDeleteIngredient() throws Exception {
+        //then
+        mockMvc.perform(get("/recipe/2/ingredient/3/delete")
+        )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipe/2/ingredients"));
+
+        verify(ingredientService, times(1)).deleteById(anyLong(), anyLong());
 
     }
 }
