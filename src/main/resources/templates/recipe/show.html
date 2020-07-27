@@ -19,22 +19,36 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card-group">
-                <div class="p-3 mb-2 w-100">
+                <div class="card p-3 mb-2 w-100">
                     <div class="card-heading bg-primary border text-center">
                         <!--/*@thymesVar id="recipe" type="com.github.dariuszdabrowski.recipeproject.domain.Recipe"*/-->
-                        <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                            </div>
+
+                            <div class="col-md-3">
+                                <a class="btn btn-light" href="#"
+                                   th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body border">
                         <div class="row">
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <ul>
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
                                     <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat three</li>
                                 </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="../../static/images/guacamole400x400WithX.jpg"
+                                     th:src="@{/images/guacamole400x400WithX.jpg}"
+                                     width="200" height="200">
                             </div>
                         </div>
                         <div class="row">

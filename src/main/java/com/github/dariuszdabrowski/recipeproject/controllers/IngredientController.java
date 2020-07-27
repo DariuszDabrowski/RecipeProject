@@ -91,6 +91,6 @@ public class IngredientController {
                              @PathVariable String id) {
         ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));
 
-        return "redirect:/recipe/{recipeId}/ingredients";
+        return "redirect:/recipe/" + recipeId +"/ingredients";
     }
 }
