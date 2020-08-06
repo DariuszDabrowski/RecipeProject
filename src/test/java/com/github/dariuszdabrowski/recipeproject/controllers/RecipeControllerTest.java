@@ -2,6 +2,7 @@ package com.github.dariuszdabrowski.recipeproject.controllers;
 
 import com.github.dariuszdabrowski.recipeproject.commands.RecipeCommand;
 import com.github.dariuszdabrowski.recipeproject.domain.Recipe;
+import com.github.dariuszdabrowski.recipeproject.exceptions.NotFoundException;
 import com.github.dariuszdabrowski.recipeproject.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,15 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception {
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
